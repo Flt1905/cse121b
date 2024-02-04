@@ -15,14 +15,14 @@ const profilePicture = "images/profile.webp";
 
 /* Step 3 - Element Variables */
 
-//onst nameElement = document.getElementById('#name');
-const foodElement = document.getElementById('#food');
+const nameElement = document.getElementById('name');
+const foodElement = document.getElementById('food');
 const yearElement = document.querySelector("#year");
 const imageElement = document.querySelector('img');
 
 // /* Step 4 - Adding Content */
 
-//nameElement.innerHTML = <strong> ${fullName}</strong>;
+nameElement.innerHTML = fullName
 yearElement.textContent = currentYear;
 imageElement.setAttribute('src', profilePicture);
 imageElement.setAttribute('alt', `This is ${fullName}`);
@@ -30,7 +30,7 @@ imageElement.setAttribute('alt', `This is ${fullName}`);
 /* Step 5 - Array */
 
 let  lovedFoods = ['fruits', 'Cheese','rice','Meat'];
-const food = document.getElementById('lovedFoods');
+
 
 foodElement.innerHTML = lovedFoods;
 let newfood = 'orange'
