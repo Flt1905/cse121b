@@ -29,7 +29,7 @@ imageElement.setAttribute('alt', `This is ${fullName}`);
 
 /* Step 5 - Array */
 
-let  lovedFoods = ['fruits', 'Cheese','rice','Meat'];
+let  lovedFoods = ['Fruits', 'Cheese','Rice','Meat'];
 
 
 foodElement.innerHTML = lovedFoods;
