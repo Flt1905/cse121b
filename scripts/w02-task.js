@@ -33,7 +33,7 @@ let  lovedFoods = ['Fruits', 'Cheese','Rice','Meat'];
 
 
 foodElement.innerHTML = lovedFoods;
-let newfood = 'orange'
+let newfood = 'Orange'
 lovedFoods.push(newfood);
 foodElement.innerHTML+= `<br>${lovedFoods}`
 // console.log (food);
