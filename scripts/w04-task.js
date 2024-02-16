@@ -67,5 +67,3 @@ myProfile.placesLived.forEach(place => {
 
 
 
-console.log(myProfile.favoriteFoods[3])
-console.log(myProfile.placesLived)
