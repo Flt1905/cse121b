@@ -15,11 +15,16 @@ let myProfile = {name: "Fulu Tshilande",
 
 
 let newPlace = {
-    place: "proteaNorth",
-    length:" 12 years"
+    place: "Protea North",
+    length:" 12 years",
 
 };
-myProfile.placesLived.push(newPlace);
+myProfile.placesLived.push(
+
+{ place: "Protea Glen", length: "3 years" },
+    { place: "Soweto", length: "2 years" },
+    { place: "Sandton", length: "1 year" },
+);
 
 
 
