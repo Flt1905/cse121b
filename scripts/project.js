@@ -88,11 +88,12 @@ function populateTable(data) {
         row.innerHTML = `
             <td>${item.KIND_DESC}</td>
             <td>${item.PROD_DESC}</td>
-            <td>${item.AMOUNT}</td>
+            <td>${item.AMOUNT}</td> <!-- Make sure this property name matches the one in your JSON data -->
         `;
         salesData.appendChild(row);
     });
 }
+
 
 
 
