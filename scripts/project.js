@@ -1,111 +1,102 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const yearDropdown = document.getElementById('yearDropdown');
     const commDescDropdown = document.getElementById('commDescDropdown');
     const prodDescDropdown = document.getElementById('prodDescDropdown');
-    const commissionCategoryDropdown = document.getElementById('commissionCategoryDropdown');
-    const totalBox = document.getElementById('totalBox');
-    const submitButton = document.getElementById('submit');
+    const monthDropdown = document.getElementById('monthDropdown');
+    const yearDropdown = document.getElementById('yearDropdown');
+    const submitButton = document.getElementById('submitButton');
+    const salesTable = document.getElementById('salesTable');
+    const salesDataBody = document.getElementById('salesData');
     const totalAmountSpan = document.getElementById('totalAmount');
-    const totalProductsList = document.getElementById('totalProducts');
 
-    let totalProducts = [];
+    let salesData = []; // To store original sales data
 
-    // Function to fetch data from JSON file and populate dropdown options
-    function populateDropdownOptions(dropdown, data) {
-        // Clear existing options
-        dropdown.innerHTML = '<option value="">Select an option</option>';
-        
-        // Extract unique values from data
-        const uniqueValues = [...new Set(data.map(item => item.value))];
+    // Function to fetch data from JSON file and populate dropdowns
+    function fetchData() {
+        fetch('output.json')
+            .then(response => response.json())
+            .then(data => {
+                salesData = data;
+                populateDropdowns();
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
 
-        // Add options based on unique values
-        uniqueValues.forEach(value => {
+    // Function to populate dropdowns with unique values
+    function populateDropdowns() {
+        const uniqueCommDesc = [...new Set(salesData.map(item => item.COMM_DESC))];
+        const uniqueProdDesc = [...new Set(salesData.map(item => item.PROD_DESC))];
+        const uniqueMonths = [...new Set(salesData.map(item => item.MONTH))];
+        const uniqueYears = [...new Set(salesData.map(item => item.YEAR))];
+
+        populateDropdown(commDescDropdown, uniqueCommDesc);
+        populateDropdown(prodDescDropdown, uniqueProdDesc);
+        populateDropdown(monthDropdown, uniqueMonths);
+        populateDropdown(yearDropdown, uniqueYears);
+    }
+
+    // Function to populate a dropdown with options
+    function populateDropdown(dropdown, options) {
+        dropdown.innerHTML = '';
+        options.forEach(option => {
             const optionElem = document.createElement('option');
-            optionElem.value = value;
-            optionElem.textContent = value;
+            optionElem.value = option;
+            optionElem.textContent = option;
             dropdown.appendChild(optionElem);
         });
     }
 
-    // Function to calculate total amount
-    function calculateTotalAmount(data) {
-        return data.reduce((total, item) => {
-            totalProducts.push(item.PROD_DESC); // Push product description to totalProducts array
-            return total + parseFloat(item.Amount);
-        }, 0);
-    }
-
-    // Function to fetch data from JSON file and populate table
-    function populateTable(data) {
-        const salesData = document.getElementById('salesData').getElementsByTagName('tbody')[0];
-        salesData.innerHTML = ''; // Clear existing rows
-        totalProducts = []; // Clear previous products
-
-        let totalAmount = 0;
-
-        data.forEach(item => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${item.KIND_DESC}</td>
-                <td>${item.COMM_DESC}</td>
-                <td>${item.PROD_DESC}</td>
-                <td>${item.MONTH}</td>
-                <td>${item.AMOUNT}</td>
-                <td>${item["COMMISSION CATEGORY"]}</td>
-                <td>${item.YEAR}</td>
-            `;
-            salesData.appendChild(tr);
-
-            // Accumulate total amount
-            totalAmount += parseFloat(item.Amount);
-        });
-
-        // Update total box
-        totalAmountSpan.textContent = `$${totalAmount.toFixed(2)}`;
-        totalProductsList.innerHTML = ''; // Clear previous products
-        totalProducts.forEach(product => {
-            const li = document.createElement('li');
-            li.textContent = product;
-            totalProductsList.appendChild(li);
-        });
-    }//C:\Users\flt1905\OneDrive - Liberty Holdings\Desktop\cse121b\scripts\project.js
-    //C:\Users\flt1905\OneDrive - Liberty Holdings\Desktop\cse121b\scripts\output.json
-    //C:\Users\flt1905\OneDrive - Liberty Holdings\Desktop\cse121b\project.html
-
-    // Fetch data from JSON file and populate dropdowns
-    fetch('output.json')
-        .then(response => response.json())
-        .then(data => {
-            populateDropdownOptions(yearDropdown, data.map(item => ({value: item.YEAR, label: item.YEAR})));
-            populateDropdownOptions(commDescDropdown, data.map(item => ({value: item.COMM_DESC, label: item.COMM_DESC})));
-            populateDropdownOptions(prodDescDropdown, data.map(item => ({value: item.PROD_DESC, label: item.PROD_DESC})));
-            populateDropdownOptions(commissionCategoryDropdown, data.map(item => ({value: item["COMMISSION CATEGORY"], label: item["COMMISSION CATEGORY"]})));
-
-            // Update total box initially
-            totalBox.textContent = `Total Amount: $${calculateTotalAmount(data).toFixed(2)}`;
-        })
-        .catch(error => console.error('Error fetching data:', error));
-
     // Event listener for submit button
     submitButton.addEventListener('click', function() {
-        // Fetch selected options from dropdowns and filter data
-        const yearValue = yearDropdown.value;
-        const commDescValue = commDescDropdown.value;
-        const prodDescValue = prodDescDropdown.value;
-        const commissionCategoryValue = commissionCategoryDropdown.value;
+        const commDesc = commDescDropdown.value;
+        const prodDesc = prodDescDropdown.value;
+        const month = monthDropdown.value;
+        const year = yearDropdown.value;
 
-        fetch('output.json')
-            .then(response => response.json())
-            .then(data => {
-                let filteredData = data;
-                if (yearValue) filteredData = filteredData.filter(item => item.YEAR === yearValue);
-                if (commDescValue) filteredData = filteredData.filter(item => item.COMM_DESC === commDescValue);
-                if (prodDescValue) filteredData = filteredData.filter(item => item.PROD_DESC === prodDescValue);
-                if (commissionCategoryValue) filteredData = filteredData.filter(item => item["COMMISSION CATEGORY"] === commissionCategoryValue);
-                
-                // Populate table with filtered data
-                populateTable(filteredData);
-            })
-            .catch(error => console.error('Error fetching data:', error));
+        // Filter data based on selected options
+        const filteredData = salesData.filter(item =>
+            (!commDesc || item.COMM_DESC === commDesc) &&
+            (!prodDesc || item.PROD_DESC === prodDesc) &&
+            (!month || item.MONTH === month) &&
+            (!year || item.YEAR.toString() === year)
+        );
+
+        // Populate table with filtered data
+        populateTable(filteredData);
+
+        // Calculate and display total amount
+        const totalAmount = filteredData.reduce((total, item) => total + parseFloat(item.AMOUNT), 0);
+        totalAmountSpan.innerHTML = `$${totalAmount.toFixed(2)}`;
     });
+
+// Function to populate the table
+function populateTable(data) {
+    const salesData = document.getElementById('salesData');
+    salesData.innerHTML = '';
+
+    // Create table headers
+    const tableHeaders = document.createElement('tr');
+    tableHeaders.innerHTML = `
+        <th>KIND_DESC</th>
+        <th>PROD_DESC</th>
+        <th>AMOUNT</th>
+    `;
+    salesData.appendChild(tableHeaders);
+
+    // Populate table rows
+    data.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.KIND_DESC}</td>
+            <td>${item.PROD_DESC}</td>
+            <td>${item.AMOUNT}</td>
+        `;
+        salesData.appendChild(row);
+    });
+}
+
+
+
+    // Fetch data and populate dropdowns on page load
+    fetchData();
 });
+

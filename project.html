@@ -17,30 +17,13 @@
         th {
             background-color: #f2f2f2;
         }
-        .totalBox {
-            border: 1px solid #ccc;
-            padding: 10px;
+        .total-box {
             margin-top: 20px;
-        }
-        .productsBox {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 20px;
-            float: right;
-            width: 200px;
-            height: 150px;
-            overflow-y: auto;
         }
     </style>
 </head>
 <body>
     <h2>Sales Data</h2>
-
-    <label for="yearDropdown">Year:</label>
-    <select id="yearDropdown">
-        <option value="">Select a year</option>
-    </select>
-
     <label for="commDescDropdown">Comm Desc:</label>
     <select id="commDescDropdown">
         <option value="">Select a comm desc</option>
@@ -51,37 +34,36 @@
         <option value="">Select a prod desc</option>
     </select>
 
-    <label for="commissionCategoryDropdown">Commission Category:</label>
-    <select id="commissionCategoryDropdown">
-        <option value="">Select a commission category</option>
+    <label for="monthDropdown">Month:</label>
+    <select id="monthDropdown">
+        <option value="">Select a month</option>
+    </select>
+
+    <label for="yearDropdown">Year:</label>
+    <select id="yearDropdown">
+        <option value="">Select a year</option>
     </select>
 
     <button id="submitButton">Submit</button>
+    
 
     <table id="salesTable">
         <thead>
             <tr>
-                <th>KIND_DESC</th>
-                <th>COMM_DESC</th>
-                <th>PROD_DESC</th>
-                <th>MONTH</th>
-                <th>AMOUNT</th>
-                <th>COMMISSION CATEGORY</th>
-                <th>YEAR</th>
+                <th>Data</th>
+                
+                
+                
             </tr>
         </thead>
         <tbody id="salesData">
         </tbody>
     </table>
 
-    <div class="totalBox" id="totalBox">Total Amount: $0.00</div>
-    
-    <div class="productsBox" id="productsBox">
-        <strong>Products contributing to total:</strong>
-        <ul id="totalProducts"></ul>
+    <div class="total-box">
+        <strong>Total Amount:</strong> <span id="totalAmount">$0.00</span>
     </div>
 
     <script src="scripts/project.js"></script>
 </body>
 </html>
-
