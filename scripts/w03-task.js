@@ -107,3 +107,23 @@ const sumOfMultiplied = multiplied.reduce((acc, curr) => acc + curr, 0);
 document.getElementById('sumOfMultiplied').textContent = sumOfMultiplied;
 
 });
+document.addEventListener("DOMContentLoaded", function() {
+    const subtotalInput = document.getElementById('subtotal');
+    const memberCheckbox = document.getElementById('member');
+    const getTotalButton = document.getElementById('getTotal');
+    const totalSpan = document.getElementById('total');
+
+    getTotalButton.addEventListener('click', function() {
+        // Declare and instantiate a variable that stores the numeric value entered by the user in the subtotal field
+        const subtotal = parseFloat(subtotalInput.value);
+
+        // Check if the membership checkbox has been checked
+        const discount = memberCheckbox.checked ? 0.2 : 0; // Apply a 20% discount if checked, otherwise no discount
+
+        // Calculate the total after applying the discount
+        const total = subtotal * (1 - discount);
+
+        // Output the total to the total span in the format shown with two decimals using a template string
+        totalSpan.textContent = `$${total.toFixed(2)}`;
+    });
+});
