@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Data</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Sales Data</h2>
+    <label for="yearDropdown">Year:</label>
+    <select id="yearDropdown">
+        <option value="">Select a year</option>
+    </select>
+
+    <label for="commDescDropdown">Comm Desc:</label>
+    <select id="commDescDropdown">
+        <option value="">Select a comm desc</option>
+    </select>
+
+    <label for="prodDescDropdown">Prod Desc:</label>
+    <select id="prodDescDropdown">
+        <option value="">Select a prod desc</option>
+    </select>
+
+    <label for="commissionCategoryDropdown">Commission Category:</label>
+    <select id="commissionCategoryDropdown">
+        <option value="">Select a commission category</option>
+    </select>
+
+    <button id="submitButton">Submit</button>
+
+    <table id="salesTable">
+        <thead>
+            <tr>
+                <th>KIND_DESC</th>
+                <th>COMM_DESC</th>
+                <th>PROD_DESC</th>
+                <th>MONTH</th>
+                <th>Amount</th>
+                <th>COMMISSION CATEGORY</th>
+                <th>YEAR</th>
+            </tr>
+        </thead>
+        <tbody id="salesData">
+        </tbody>
+    </table>
+
+    <div id="totalBox">Total Amount: $0.00</div>
+
+    <script src="scripts/project.js"></script>
+</body>
+</html>
