@@ -70,5 +70,40 @@ document.getElementById('getTotal').addEventListener('click', function() {
     // Get the value entered by the user in the subtotal field
     const subtotal = parseFloat(document.getElementById('subtotal').value);
     
-    
+    // Declare and instantiate an array variable to hold the numbers 1 through 13
+const numbersArray = Array.from({ length: 13 }, (_, index) => index + 1);
+
+// Assign the value of the array variable to the HTML element with an ID of array
+document.getElementById('array').textContent = numbersArray.join(', ');
+
+// Use the filter() array method to find all of the odd numbers
+const oddNumbers = numbersArray.filter(num => num % 2 !== 0);
+
+// Assign the result to the HTML element with an ID of odds
+document.getElementById('odds').textContent = oddNumbers.join(', ');
+
+// Use the filter() array method to find all of the even numbers
+const evenNumbers = numbersArray.filter(num => num % 2 === 0);
+
+// Assign the result to the HTML element with an ID of evens
+document.getElementById('evens').textContent = evenNumbers.join(', ');
+
+// Use the reduce() array method to sum the array variable elements
+const sumOfArray = numbersArray.reduce((acc, curr) => acc + curr, 0);
+
+// Assign the result to the HTML element with an ID of sumOfArray
+document.getElementById('sumOfArray').textContent = sumOfArray;
+
+// Use the map() array method to multiply each element in the array variable by 2
+const multiplied = numbersArray.map(num => num * 2);
+
+// Assign the result to the HTML element with an ID of multiplied
+document.getElementById('multiplied').textContent = multiplied.join(', ');
+
+// Use the map() and reduce() array methods to sum the array elements after multiplying each element by two
+const sumOfMultiplied = multiplied.reduce((acc, curr) => acc + curr, 0);
+
+// Assign the result to the HTML element with an ID of sumOfMultiplied
+document.getElementById('sumOfMultiplied').textContent = sumOfMultiplied;
+
 });
