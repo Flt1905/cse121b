@@ -1,53 +1,74 @@
 /* LESSON 3 - Programming Tasks */
 
 /* FUNCTIONS */
-/* Function Definition - Add Numbers */
-function add (number1, number2){
-return number1 + number2};
+// Function declaration to add two numbers
+function add(number1, number2) {
+    return number1 + number2;
+}
 
-let addNumber1 = Number(document.querySelector('#add1').value);
-let addNumber2 = Number(document.querySelector('#add2').value);
-document.querySelector('#Sum').value = add(addNumber1, addNumber2);
-document.querySelector('#addNumbers').addEventListener('click , addNumbers);
+// Function declaration to subtract two numbers
+function subtract(number1, number2) {
+    return number1 - number2;
+}
 
+// Function declaration to multiply two numbers
+const multiply = (number1, number2) => {
+    return number1 * number2;
+};
 
+// Function declaration to divide two numbers
+const divide = function(number1, number2) {
+    return number1 / number2;
+};
 
-/* Function Expression - Subtract Numbers */
-function subtract (number1, number2){
-return number1 - number2};
+// Function to get the values of two HTML form controls and perform addition
+function addNumbers() {
+    const number1 = parseFloat(document.getElementById('add1').value);
+    const number2 = parseFloat(document.getElementById('add2').value);
+    const sum = add(number1, number2);
+    document.getElementById('sum').value = sum;
+}
 
-let subtractNumber1 = Number(document.querySelector('#subtract1').value);
-let subtractNumber2 = Number(document.querySelector('#subtract2').value);
-document.querySelector('#difference').value = subtract(subtractNumber1, subtractNumber2);
-document.querySelector('#subtractNumbers').addEventListener('click , subtractNumbers);
+// Function to get the values of two HTML form controls and perform subtraction
+function subtractNumbers() {
+    const number1 = parseFloat(document.getElementById('subtract1').value);
+    const number2 = parseFloat(document.getElementById('subtract2').value);
+    const difference = subtract(number1, number2);
+    document.getElementById('difference').value = difference;
+}
 
-/* Arrow Function - -Multiply Numbers */
- multiply= function (Number1, Number2){
-return Number1 * Number2};
+// Function to get the values of two HTML form controls and perform multiplication
+const multiplyNumbers = () => {
+    const number1 = parseFloat(document.getElementById('factor1').value);
+    const number2 = parseFloat(document.getElementById('factor2').value);
+    const product = multiply(number1, number2);
+    document.getElementById('product').value = product;
+};
 
-multiply =() => {return (Number1 * Number2)};
+// Function to get the values of two HTML form controls and perform division
+function divideNumbers() {
+    const number1 = parseFloat(document.getElementById('dividend').value);
+    const number2 = parseFloat(document.getElementById('divisor').value);
+    const quotient = divide(number1, number2);
+    document.getElementById('quotient').value = quotient;
+}
+
+// Event listener for addition button
+document.getElementById('addNumbers').addEventListener('click', addNumbers);
+
+// Event listener for subtraction button
+document.getElementById('subtractNumbers').addEventListener('click', subtractNumbers);
+
+// Event listener for multiplication button
+document.getElementById('multiplyNumbers').addEventListener('click', multiplyNumbers);
+
+// Event listener for division button
+document.getElementById('divideNumbers').addEventListener('click', divideNumbers);
+
+// Event listener for the Get Total Due button
+document.getElementById('getTotal').addEventListener('click', function() {
+    // Get the value entered by the user in the subtotal field
+    const subtotal = parseFloat(document.getElementById('subtotal').value);
     
-let Number1 = Number(document.querySelector('#factor1').value);
-let Number2 = Number(document.querySelector('#factor2').value);
-document.querySelector('#product').value = multiply(Number1, Number2);
-document.querySelector('#multiplyNumbers').addEventListener('click , multiplyNumbers);
-
-
-/* Open Function Use - Divide Numbers */
-
-
-/* Decision Structure */
-
-
-/* ARRAY METHODS - Functional Programming */
-/* Output Source Array */
-
-/* Output Odds Only Array */
-
-/* Output Evens Only Array */
-
-/* Output Sum of Org. Array */
-
-/* Output Multiplied by 2 Array */
-
-/* Output Sum of Multiplied by 2 Array */
+    
+});
