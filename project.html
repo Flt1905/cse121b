@@ -17,10 +17,25 @@
         th {
             background-color: #f2f2f2;
         }
+        .totalBox {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .productsBox {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            float: right;
+            width: 200px;
+            height: 150px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
     <h2>Sales Data</h2>
+
     <label for="yearDropdown">Year:</label>
     <select id="yearDropdown">
         <option value="">Select a year</option>
@@ -50,7 +65,7 @@
                 <th>COMM_DESC</th>
                 <th>PROD_DESC</th>
                 <th>MONTH</th>
-                <th>Amount</th>
+                <th>AMOUNT</th>
                 <th>COMMISSION CATEGORY</th>
                 <th>YEAR</th>
             </tr>
@@ -59,8 +74,14 @@
         </tbody>
     </table>
 
-    <div id="totalBox">Total Amount: $0.00</div>
+    <div class="totalBox" id="totalBox">Total Amount: $0.00</div>
+    
+    <div class="productsBox" id="productsBox">
+        <strong>Products contributing to total:</strong>
+        <ul id="totalProducts"></ul>
+    </div>
 
     <script src="scripts/project.js"></script>
 </body>
 </html>
+

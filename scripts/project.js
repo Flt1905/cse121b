@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const commissionCategoryDropdown = document.getElementById('commissionCategoryDropdown');
     const totalBox = document.getElementById('totalBox');
     const submitButton = document.getElementById('submit');
+    const totalAmountSpan = document.getElementById('totalAmount');
+    const totalProductsList = document.getElementById('totalProducts');
+
+    let totalProducts = [];
 
     // Function to fetch data from JSON file and populate dropdown options
     function populateDropdownOptions(dropdown, data) {
@@ -25,13 +29,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to calculate total amount
     function calculateTotalAmount(data) {
-        return data.reduce((total, item) => total + parseFloat(item.Amount), 0);
+        return data.reduce((total, item) => {
+            totalProducts.push(item.PROD_DESC); // Push product description to totalProducts array
+            return total + parseFloat(item.Amount);
+        }, 0);
     }
 
     // Function to fetch data from JSON file and populate table
     function populateTable(data) {
         const salesData = document.getElementById('salesData').getElementsByTagName('tbody')[0];
         salesData.innerHTML = ''; // Clear existing rows
+        totalProducts = []; // Clear previous products
+
         let totalAmount = 0;
 
         data.forEach(item => {
@@ -41,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <td>${item.COMM_DESC}</td>
                 <td>${item.PROD_DESC}</td>
                 <td>${item.MONTH}</td>
-                <td>${item.Amount}</td>
+                <td>${item.AMOUNT}</td>
                 <td>${item["COMMISSION CATEGORY"]}</td>
                 <td>${item.YEAR}</td>
             `;
@@ -52,11 +61,19 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         // Update total box
-        totalBox.textContent = `Total Amount: $${totalAmount.toFixed(2)}`;
-    }
+        totalAmountSpan.textContent = `$${totalAmount.toFixed(2)}`;
+        totalProductsList.innerHTML = ''; // Clear previous products
+        totalProducts.forEach(product => {
+            const li = document.createElement('li');
+            li.textContent = product;
+            totalProductsList.appendChild(li);
+        });
+    }//C:\Users\flt1905\OneDrive - Liberty Holdings\Desktop\cse121b\scripts\project.js
+    //C:\Users\flt1905\OneDrive - Liberty Holdings\Desktop\cse121b\scripts\output.json
+    //C:\Users\flt1905\OneDrive - Liberty Holdings\Desktop\cse121b\project.html
 
     // Fetch data from JSON file and populate dropdowns
-    fetch('cse121b/output.json')
+    fetch('output.json')
         .then(response => response.json())
         .then(data => {
             populateDropdownOptions(yearDropdown, data.map(item => ({value: item.YEAR, label: item.YEAR})));
