@@ -44,7 +44,7 @@ let reset = ()=> {
 /* sortBy Function */
 const sortBy = (temples) => {    
     reset();
-    let filter = document.querySelector("#sortBy").value;
+    let filter = document.querySelector("#filtered").value;
     switch (filter) {
       case "utah":
                     displayTemples(temples.filter((temple)=>temple.location.includes("Utah")));
@@ -63,4 +63,4 @@ const sortBy = (temples) => {
 }
 getTemples();
     /* Event Listener */
-document.querySelector('#sortBy').addEventListener('change',() => sortBy(templeList));
+document.querySelector('#filtered').addEventListener('change',() => sortBy(templeList));
