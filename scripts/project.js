@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to fetch data from JSON file and populate dropdowns
     function fetchData() {
-        fetch('output.json')
+        fetch('scripts/output.json')
             .then(response => response.json())
             .then(data => {
                 salesData = data;
